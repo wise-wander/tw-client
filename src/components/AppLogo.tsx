@@ -1,6 +1,6 @@
 import { DraftingCompass } from 'lucide-react';
 
-export default function Logo() {
+export default function AppLogo() {
   return (
     <div className='flex h-10 flex-row items-center space-x-2'>
       <DraftingCompass size={28} />

@@ -1,4 +1,4 @@
-import MaxWidthContainer from '@/components/max-width-container';
+import MaxWidthContainer from '@/components/MaxWidthContainer';
 
 const HERO_IMAGE_URL =
   'https://www.wanderlustmagazine.com/wp-content/uploads/2023/11/golden-hands-bridge-da-nang-vietnam.jpg';

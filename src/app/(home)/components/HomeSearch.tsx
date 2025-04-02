@@ -1,6 +1,6 @@
 'use client';
 
-import MaxWidthContainer from '@/components/max-width-container';
+import MaxWidthContainer from '@/components/MaxWidthContainer';
 import { MapPin, Search } from 'lucide-react';
 import { useState } from 'react';
 

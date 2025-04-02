@@ -2,6 +2,7 @@ import { fontMono, fontSans } from '@/config/font';
 import '@/styles/globals.css';
 import cn from '@/utils';
 import type { Metadata } from 'next';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: 'TripWise',
@@ -23,6 +24,7 @@ export default function RootLayout({
         )}
       >
         <main className='relative'>{children}</main>
+        <Toaster position='top-right' />
       </body>
     </html>
   );

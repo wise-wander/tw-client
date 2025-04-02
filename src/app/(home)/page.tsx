@@ -1,7 +1,7 @@
-import HomeHero from './components/hero';
-import HomeSearch from './components/search';
+import HomeHero from './components/HomeHero';
+import HomeSearch from './components/HomeSearch';
 
-export default function Home() {
+export default function HomePage() {
   return (
     <section className='flex flex-col'>
       <HomeSearch />

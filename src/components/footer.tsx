@@ -1,8 +1,8 @@
-import { NAVIGATION_ITEMS } from '@/constants/navigations';
+import { NAVIGATION_ITEMS } from '@/constants/NavigationItems';
 import Link from 'next/link';
-import FacebookIcon from './icons/facebook-icon';
-import XSocialIcon from './icons/social-x-icon';
-import YoutubeIcon from './icons/youtube-icon';
+import FacebookIcon from './icons/FacebookIcon';
+import XSocialIcon from './icons/SocialXIcon';
+import YoutubeIcon from './icons/YoutubeIcon';
 
 export default function Footer() {
   return (

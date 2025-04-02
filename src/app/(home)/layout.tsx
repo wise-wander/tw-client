@@ -1,5 +1,5 @@
-import Footer from '@/components/footer';
-import Navbar from '@/components/navbar';
+import Footer from '@/components/Footer';
+import Navbar from '@/components/Navbar';
 
 export default function HomeLayout({
   children,
@@ -9,7 +9,7 @@ export default function HomeLayout({
   return (
     <div className='flex flex-col'>
       <Navbar />
-      <div className='relative grow'>{children}</div>
+      <div className='relative mt-24 grow'>{children}</div>
       <Footer />
     </div>
   );
