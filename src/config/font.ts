@@ -1,8 +1,9 @@
-import { Roboto, Roboto_Mono } from 'next/font/google';
+import { Poppins, Roboto_Mono } from 'next/font/google';
 
-export const fontSans = Roboto({
-  variable: '--font-roboto-sans',
+export const fontSans = Poppins({
+  variable: '--font-poppins-sans',
   subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 });
 
 export const fontMono = Roboto_Mono({
