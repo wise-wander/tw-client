@@ -1,4 +1,7 @@
+'use client';
+
 import { NAVIGATION_ITEMS } from '@/constants/NavigationItems';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import FacebookIcon from './icons/FacebookIcon';
 import XSocialIcon from './icons/SocialXIcon';
@@ -15,9 +18,15 @@ export default function Footer() {
         ))}
       </div>
       <div className='grid grid-flow-col gap-4'>
-        <FacebookIcon className='size-10' />
-        <YoutubeIcon className='size-10' />
-        <XSocialIcon className='size-10' />
+        <motion.button className='btn btn-square btn-ghost'>
+          <FacebookIcon className='size-10' />
+        </motion.button>
+        <motion.button className='btn btn-square btn-ghost'>
+          <YoutubeIcon className='size-10' />
+        </motion.button>
+        <motion.button className='btn btn-square btn-ghost'>
+          <XSocialIcon className='size-10' />
+        </motion.button>
       </div>
       <aside>
         <p>

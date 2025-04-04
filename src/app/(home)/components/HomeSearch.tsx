@@ -1,6 +1,7 @@
 'use client';
 
 import MaxWidthContainer from '@/components/MaxWidthContainer';
+import { motion } from 'framer-motion';
 import { MapPin, Search } from 'lucide-react';
 import { useState } from 'react';
 
@@ -29,9 +30,9 @@ export default function HomeSearch() {
             placeholder='Places to go, things to do, hotels...'
           />
         </label>
-        <button type='submit' className='btn join-item btn-primary'>
+        <motion.button type='submit' className='btn join-item btn-primary'>
           <Search size={16} />
-        </button>
+        </motion.button>
       </form>
     </MaxWidthContainer>
   );

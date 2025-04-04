@@ -11,7 +11,7 @@ export default function MaxWidthContainer({
 }: Props) {
   return (
     <div
-      className={cn('container mx-auto max-w-7xl p-1', className)}
+      className={cn('container mx-auto max-w-7xl px-6 py-1', className)}
       {...props}
     >
       {children}
