@@ -1,9 +1,6 @@
 'use client';
 
 import AppLogo from './AppLogo';
-import FacebookIcon from './icons/FacebookIcon';
-import XSocialIcon from './icons/SocialXIcon';
-import YoutubeIcon from './icons/YoutubeIcon';
 
 export default function AppFooter() {
   return (
@@ -12,13 +9,6 @@ export default function AppFooter() {
         <AppLogo />
         <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
       </aside>
-      <nav>
-        <div className='grid grid-flow-col gap-4'>
-          <XSocialIcon className='size-12' />
-          <YoutubeIcon className='size-12' />
-          <FacebookIcon className='size-12' />
-        </div>
-      </nav>
     </footer>
   );
 }

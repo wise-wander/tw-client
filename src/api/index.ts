@@ -8,12 +8,33 @@ const request = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  withXSRFToken: true,
   withCredentials: true,
+  withXSRFToken: true,
+  xsrfCookieName: 'csrf_access_token',
 });
 
 request.interceptors.request.use(
-  (config) => config,
+  (config) => {
+    const accessToken = document.cookie
+      .split('; ')
+      .find((row) => row.startsWith('access_token_cookie='))
+      ?.split('=')[1];
+
+    const csrfToken = document.cookie
+      .split('; ')
+      .find((row) => row.startsWith('csrf_token_cookie='))
+      ?.split('=')[1];
+
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+
+    if (csrfToken) {
+      config.headers['X-CSRF-Token'] = csrfToken;
+    }
+
+    return config;
+  },
   (error) => Promise.reject(error),
 );
 
