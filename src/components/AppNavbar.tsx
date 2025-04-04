@@ -45,11 +45,7 @@ export default function AppNavbar() {
         <div className='w-full bg-base-300'>
           <MaxWidthContainer className='flex flex-row items-center space-x-1'>
             {NAVIGATION_ITEMS.map((item, index) => (
-              <Link
-                key={index}
-                href={item.href}
-                className='btn btn-ghost btn-sm'
-              >
+              <Link key={index} href={item.href} className='btn btn-ghost'>
                 {item.title}
               </Link>
             ))}

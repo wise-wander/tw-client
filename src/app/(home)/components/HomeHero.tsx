@@ -15,11 +15,11 @@ export default function HomeHero() {
         />
         <div className='absolute top-0 left-0 z-10 h-full w-full bg-neutral/50' />
         <div className='absolute z-20 flex h-full w-full items-center justify-center text-neutral-content'>
-          <div className='max-w-md text-center'>
-            <h1 className='mb-4 text-5xl font-bold capitalize'>
+          <div className='max-w-lg text-center'>
+            <h1 className='text-6xl/relaxed font-bold capitalize'>
               Step into wonder
             </h1>
-            <p className='text-lg'>
+            <p className='text-xl'>
               Explore Vietnam&apos;s attractions and Beyond!
             </p>
           </div>

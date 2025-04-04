@@ -8,7 +8,7 @@ import MaxWidthContainer from '@/components/MaxWidthContainer';
 import { motion } from 'framer-motion';
 import { Mail, RectangleEllipsis, User } from 'lucide-react';
 import Link from 'next/link';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, Fragment, useState } from 'react';
 import { initSignUpForm, ISignUpForm, signUpSchema } from './schema';
 
 export default function SignUpPage() {
@@ -71,7 +71,7 @@ export default function SignUpPage() {
             <FormInput
               required
               name='name'
-              icon={<User size={16} />}
+              icon={<User />}
               placeholder='Full name'
               error={errors.name}
               value={formData.name}
@@ -81,7 +81,7 @@ export default function SignUpPage() {
             <FormInput
               required
               name='email'
-              icon={<Mail size={16} />}
+              icon={<Mail />}
               placeholder='Email'
               error={errors.email}
               value={formData.email}
@@ -92,7 +92,7 @@ export default function SignUpPage() {
               required
               type='password'
               name='password'
-              icon={<RectangleEllipsis size={16} />}
+              icon={<RectangleEllipsis />}
               placeholder='Password'
               onChange={handleChange}
               error={errors.password}
@@ -103,7 +103,7 @@ export default function SignUpPage() {
               required
               type='password'
               name='passwordConfirmation'
-              icon={<RectangleEllipsis size={16} />}
+              icon={<RectangleEllipsis />}
               placeholder='Confirm password'
               onChange={handleChange}
               error={errors.passwordConfirmation}
@@ -123,10 +123,11 @@ export default function SignUpPage() {
         </form>
         <div className='divider' />
         <p className='text-center'>
-          Already have an account?{' '}
-          <Link href='/log-in' className='link text-primary'>
+          <Fragment>Already have an account?</Fragment>
+          <Link href='/sign-in' className='mx-1 link text-primary'>
             Sign in
           </Link>
+          <Fragment>now.</Fragment>
         </p>
       </div>
     </MaxWidthContainer>

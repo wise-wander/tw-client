@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 import { Mail, RectangleEllipsis } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, Fragment, useState } from 'react';
 import toast from 'react-hot-toast';
 import { initSignInForm, ISignInForm, signInSchema } from './schema';
 
@@ -81,7 +81,7 @@ export default function SignInPage() {
             <FormInput
               required
               name='email'
-              icon={<Mail size={16} />}
+              icon={<Mail />}
               placeholder='Email'
               error={errors.email}
               value={formData.email}
@@ -92,7 +92,7 @@ export default function SignInPage() {
               required
               type='password'
               name='password'
-              icon={<RectangleEllipsis size={16} />}
+              icon={<RectangleEllipsis />}
               placeholder='Password'
               onChange={handleChange}
               error={errors.password}
@@ -118,11 +118,11 @@ export default function SignInPage() {
         </form>
         <div className='divider' />
         <p className='text-center'>
-          Don&apos;t have account?{' '}
-          <Link href='/sign-up' className='link text-primary'>
+          <Fragment>Don&apos;t have account?</Fragment>
+          <Link href='/sign-up' className='mx-1 link text-primary'>
             Sign up
-          </Link>{' '}
-          now.
+          </Link>
+          <Fragment>now.</Fragment>
         </p>
       </div>
     </MaxWidthContainer>

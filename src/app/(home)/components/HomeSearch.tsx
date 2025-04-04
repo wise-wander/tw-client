@@ -15,11 +15,11 @@ export default function HomeSearch() {
 
   return (
     <MaxWidthContainer className='mt-24 flex flex-col items-center justify-center gap-4'>
-      <h1 className='text-center text-4xl/relaxed font-extrabold'>
+      <h1 className='text-center text-6xl/relaxed font-extrabold'>
         Discover the Land of Timeless Wonders
       </h1>
       <form onSubmit={handleSubmit} className='join flex w-full justify-center'>
-        <label className='input join-item w-full max-w-3xl'>
+        <label className='input input-lg join-item w-full max-w-3xl'>
           <MapPin />
           <input
             type='text'
@@ -35,7 +35,7 @@ export default function HomeSearch() {
           type='submit'
           aria-label='Search'
           whileTap={{ scale: 0.95 }}
-          className='btn join-item btn-primary'
+          className='btn join-item btn-lg btn-primary'
         >
           <Search size={16} />
         </motion.button>
