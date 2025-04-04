@@ -5,13 +5,13 @@ import Image from 'next/image';
 export default function HomeHero() {
   return (
     <MaxWidthContainer className='h-80 w-full md:h-96 lg:h-[32rem]'>
-      <div className='relative h-full w-full overflow-hidden rounded-lg'>
+      <div className='relative h-full w-full overflow-hidden rounded-box'>
         <Image
+          fill
           priority
           src={HomeImage}
-          layout='fill'
-          objectFit='cover'
           alt="Da Nang's Golden Bridge"
+          className='object-cover object-center'
         />
         <div className='absolute top-0 left-0 z-10 h-full w-full bg-neutral/50' />
         <div className='absolute z-20 flex h-full w-full items-center justify-center text-neutral-content'>

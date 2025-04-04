@@ -3,7 +3,7 @@ import HomeSearch from './components/HomeSearch';
 
 export default function HomePage() {
   return (
-    <section className='flex flex-col'>
+    <section className='flex flex-col gap-20'>
       <HomeSearch />
       <HomeHero />
     </section>

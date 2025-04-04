@@ -1,6 +1,7 @@
 'use client';
 
 import request from '@/api';
+import { AUTH_ROUTES } from '@/api/constants';
 import AppLogo from '@/components/AppLogo';
 import FormInput from '@/components/FormInput';
 import MaxWidthContainer from '@/components/MaxWidthContainer';
@@ -45,7 +46,7 @@ export default function LogInPage() {
     setIsSubmitting(true);
     try {
       const response = await request.post<IApiResponse<null>>(
-        `/auth/log-in`,
+        AUTH_ROUTES.LOGIN,
         formData,
       );
       if (response.data.status === 200) {
@@ -72,11 +73,11 @@ export default function LogInPage() {
             <h1 className='text-3xl leading-10 font-bold text-primary'>
               Intelligent Destination and Route Recommendations for Journey
             </h1>
-            <h2 className='text-sm text-secondary'>
+            <h2 className='text-secondary'>
               Welcome back! Please login to your account.
             </h2>
           </div>
-          <div className='flex flex-col gap-4'>
+          <div className='flex flex-col gap-2'>
             <FormInput
               required
               name='email'

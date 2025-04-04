@@ -19,12 +19,12 @@ export default function LogInLayout({
         className='absolute top-0 left-0 h-full w-full max-w-1/2'
       >
         <Image
+          fill
           priority
           quality={100}
-          layout='fill'
-          objectFit='cover'
           src={LoginImage}
           alt='Golden Bridge'
+          className='object-cover object-center'
         />
       </motion.div>
       <motion.div

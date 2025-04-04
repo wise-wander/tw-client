@@ -14,7 +14,7 @@ export default function HomeSearch() {
   }
 
   return (
-    <MaxWidthContainer className='mt-16 mb-8 flex flex-col items-center justify-center gap-4'>
+    <MaxWidthContainer className='mt-24 flex flex-col items-center justify-center gap-4'>
       <h1 className='text-center text-4xl/relaxed font-extrabold'>
         Discover the Land of Timeless Wonders
       </h1>

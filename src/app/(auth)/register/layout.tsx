@@ -19,12 +19,12 @@ export default function RegisterLayout({
         className='absolute top-0 right-0 h-full w-full max-w-1/2'
       >
         <Image
+          fill
           priority
-          alt='Da Nang beach'
           quality={100}
+          alt='Da Nang beach'
           src={RegisterImage}
-          layout='fill'
-          objectFit='cover'
+          className='object-cover object-center'
         />
       </motion.div>
       <motion.div
