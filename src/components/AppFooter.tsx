@@ -5,7 +5,7 @@ import FacebookIcon from './icons/FacebookIcon';
 import XSocialIcon from './icons/SocialXIcon';
 import YoutubeIcon from './icons/YoutubeIcon';
 
-export default function Footer() {
+export default function AppFooter() {
   return (
     <footer className='footer-center mt-20 footer footer-horizontal bg-neutral p-10 text-neutral-content'>
       <aside>

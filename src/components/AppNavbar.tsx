@@ -14,7 +14,7 @@ import MaxWidthContainer from './MaxWidthContainer';
 
 type IMe = Omit<IUser, 'is_admin'>;
 
-export default function Navbar() {
+export default function AppNavbar() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [user, setUser] = useState<IMe | null>(null);
 
