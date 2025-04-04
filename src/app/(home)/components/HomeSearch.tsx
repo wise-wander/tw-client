@@ -23,6 +23,7 @@ export default function HomeSearch() {
           <MapPin />
           <input
             type='text'
+            name='search'
             value={input}
             aria-required
             className='input-accent'
@@ -30,7 +31,12 @@ export default function HomeSearch() {
             placeholder='Places to go, things to do, hotels...'
           />
         </label>
-        <motion.button type='submit' className='btn join-item btn-primary'>
+        <motion.button
+          type='submit'
+          aria-label='Search'
+          whileTap={{ scale: 0.95 }}
+          className='btn join-item btn-primary'
+        >
           <Search size={16} />
         </motion.button>
       </form>

@@ -18,13 +18,19 @@ export default function Footer() {
         ))}
       </div>
       <div className='grid grid-flow-col gap-4'>
-        <motion.button className='btn btn-square btn-ghost'>
+        <motion.button
+          className='btn btn-square btn-ghost'
+          aria-label='Facebook'
+        >
           <FacebookIcon className='size-10' />
         </motion.button>
-        <motion.button className='btn btn-square btn-ghost'>
+        <motion.button
+          className='btn btn-square btn-ghost'
+          aria-label='Youtube'
+        >
           <YoutubeIcon className='size-10' />
         </motion.button>
-        <motion.button className='btn btn-square btn-ghost'>
+        <motion.button className='btn btn-square btn-ghost' aria-label='X'>
           <XSocialIcon className='size-10' />
         </motion.button>
       </div>

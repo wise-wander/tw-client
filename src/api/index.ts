@@ -20,7 +20,7 @@ request.interceptors.request.use(
 request.interceptors.response.use(
   (response) => response,
   (error) => {
-    toast.error('Something went wrong. Please try again later.');
+    toast.error('An error occurred.');
     return Promise.reject(error);
   },
 );

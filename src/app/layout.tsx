@@ -18,9 +18,9 @@ export default function RootLayout({
     <html lang='en' data-theme='corporate' suppressHydrationWarning>
       <body
         className={cn(
-          'min-h-screen font-sans antialiased',
           fontSans.variable,
           fontMono.variable,
+          'min-h-screen font-sans antialiased',
         )}
       >
         <main className='relative'>{children}</main>

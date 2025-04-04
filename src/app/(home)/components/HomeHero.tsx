@@ -1,23 +1,28 @@
+import HomeImage from '@/assets/HomeImage.jpg';
 import MaxWidthContainer from '@/components/MaxWidthContainer';
-
-const HERO_IMAGE_URL =
-  'https://www.wanderlustmagazine.com/wp-content/uploads/2023/11/golden-hands-bridge-da-nang-vietnam.jpg';
+import Image from 'next/image';
 
 export default function HomeHero() {
   return (
-    <MaxWidthContainer
-      className='hero my-8 min-h-[500px] rounded-lg bg-cover bg-center p-0 shadow-md'
-      style={{
-        backgroundImage: `url(${HERO_IMAGE_URL})`,
-      }}
-    >
-      <div className='hero-overlay rounded-lg' />
-      <div className='hero-content text-center text-neutral-content'>
-        <div className='max-w-md'>
-          <h1 className='mb-5 text-5xl font-bold capitalize'>
-            Step into wonder
-          </h1>
-          <p>Explore Vietnam&apos;s attractions and Beyond!</p>
+    <MaxWidthContainer className='h-80 w-full md:h-96 lg:h-[32rem]'>
+      <div className='relative h-full w-full overflow-hidden rounded-lg'>
+        <Image
+          priority
+          src={HomeImage}
+          layout='fill'
+          objectFit='cover'
+          alt="Da Nang's Golden Bridge"
+        />
+        <div className='absolute top-0 left-0 z-10 h-full w-full bg-neutral/50' />
+        <div className='absolute z-20 flex h-full w-full items-center justify-center text-neutral-content'>
+          <div className='max-w-md text-center'>
+            <h1 className='mb-4 text-5xl font-bold capitalize'>
+              Step into wonder
+            </h1>
+            <p className='text-lg'>
+              Explore Vietnam&apos;s attractions and Beyond!
+            </p>
+          </div>
         </div>
       </div>
     </MaxWidthContainer>
