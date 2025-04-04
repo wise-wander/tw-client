@@ -5,15 +5,20 @@ import { AUTH_ROUTES } from '@/api/constants';
 import AppLogo from '@/components/AppLogo';
 import FormInput from '@/components/FormInput';
 import MaxWidthContainer from '@/components/MaxWidthContainer';
+import { IResponse } from '@/interfaces/IResponse';
 import { motion } from 'framer-motion';
-import { Mail, RectangleEllipsis, User } from 'lucide-react';
+import { Mail, RectangleEllipsis } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { initialRegisterForm, IRegisterForm, registerSchema } from './schema';
+import toast from 'react-hot-toast';
+import { initSignInForm, ISignInForm, signInSchema } from './schema';
 
-export default function RegisterPage() {
-  const [formData, setFormData] = useState<IRegisterForm>(initialRegisterForm);
-  const [errors, setErrors] = useState<IRegisterForm>(initialRegisterForm);
+export default function SignInPage() {
+  const router = useRouter();
+
+  const [formData, setFormData] = useState<ISignInForm>(initSignInForm);
+  const [errors, setErrors] = useState<ISignInForm>(initSignInForm);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -24,19 +29,15 @@ export default function RegisterPage() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setErrors(initialRegisterForm);
+    setErrors(initSignInForm);
 
     // Validate the form data
-    const validation = registerSchema.safeParse(formData);
+    const validation = signInSchema.safeParse(formData);
     if (!validation.success) {
       const fieldErrors = validation.error.flatten().fieldErrors;
       setErrors({
-        name: fieldErrors.name ? fieldErrors.name[0] : '',
         email: fieldErrors.email ? fieldErrors.email[0] : '',
         password: fieldErrors.password ? fieldErrors.password[0] : '',
-        passwordConfirmation: fieldErrors.passwordConfirmation
-          ? fieldErrors.passwordConfirmation[0]
-          : '',
       });
       return;
     }
@@ -44,8 +45,18 @@ export default function RegisterPage() {
     // Submit the form data
     setIsSubmitting(true);
     try {
-      const response = await request.post(AUTH_ROUTES.REGISTER, formData);
-      console.log('~ Register response:', response);
+      const response = await request.post<IResponse<null>>(
+        AUTH_ROUTES.SIGN_IN,
+        formData,
+      );
+      if (response.data.status === 200) {
+        toast.success(response.data.message);
+        router.push('/');
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch {
+      toast.error('An error occurred');
     } finally {
       setIsSubmitting(false);
     }
@@ -63,21 +74,10 @@ export default function RegisterPage() {
               Intelligent Destination and Route Recommendations for Journey
             </h1>
             <h2 className='text-secondary'>
-              Create your account to explore personalized travel
-              recommendations.
+              Welcome back! Please sign in to your account.
             </h2>
           </div>
           <div className='flex flex-col gap-2'>
-            <FormInput
-              required
-              name='name'
-              icon={<User size={16} />}
-              placeholder='Full name'
-              error={errors.name}
-              value={formData.name}
-              onChange={handleChange}
-              isSubmitting={isSubmitting}
-            />
             <FormInput
               required
               name='email'
@@ -99,17 +99,12 @@ export default function RegisterPage() {
               value={formData.password}
               isSubmitting={isSubmitting}
             />
-            <FormInput
-              required
-              type='password'
-              name='passwordConfirmation'
-              icon={<RectangleEllipsis size={16} />}
-              placeholder='Confirm password'
-              onChange={handleChange}
-              error={errors.passwordConfirmation}
-              value={formData.passwordConfirmation}
-              isSubmitting={isSubmitting}
-            />
+            <Link
+              href={'/forgot-password'}
+              className='text-right text-sm hover:link'
+            >
+              Forgot password?
+            </Link>
           </div>
           <motion.button
             type='submit'
@@ -118,14 +113,14 @@ export default function RegisterPage() {
             className='btn btn-primary'
             aria-disabled={isSubmitting}
           >
-            Register
+            Sign in
           </motion.button>
         </form>
         <div className='divider' />
         <p className='text-center'>
-          Already have an account?{' '}
-          <Link href='/log-in' className='link text-primary'>
-            Log in
+          Don&apos;t have account?{' '}
+          <Link href='/sign-up' className='link text-primary'>
+            Sign up
           </Link>{' '}
           now.
         </p>

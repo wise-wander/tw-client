@@ -1,7 +1,7 @@
 import { PASSWORD_REGEX } from '@/constants/Regex';
 import { z } from 'zod';
 
-export const loginSchema = z.object({
+export const signInSchema = z.object({
   email: z.string().email(),
   password: z.string().regex(PASSWORD_REGEX, {
     message:
@@ -9,9 +9,9 @@ export const loginSchema = z.object({
   }),
 });
 
-export type ILoginForm = z.infer<typeof loginSchema>;
+export type ISignInForm = z.infer<typeof signInSchema>;
 
-export const initialLoginForm: ILoginForm = {
+export const initSignInForm: ISignInForm = {
   email: '',
   password: '',
 };

@@ -1,7 +1,7 @@
 import { PASSWORD_REGEX } from '@/constants/Regex';
 import { z } from 'zod';
 
-export const registerSchema = z
+export const signUpSchema = z
   .object({
     name: z.string().min(1, { message: 'Name is required' }),
     email: z.string().email(),
@@ -18,9 +18,9 @@ export const registerSchema = z
     path: ['passwordConfirmation'],
   });
 
-export type IRegisterForm = z.infer<typeof registerSchema>;
+export type ISignUpForm = z.infer<typeof signUpSchema>;
 
-export const initialRegisterForm: IRegisterForm = {
+export const initSignUpForm: ISignUpForm = {
   name: '',
   email: '',
   password: '',

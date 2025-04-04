@@ -1,14 +1,13 @@
 'use client';
 
 import request from '@/api';
-import { AUTH_ROUTES } from '@/api/constants';
+import { ACCESS_TOKEN, AUTH_ROUTES, REFRESH_TOKEN } from '@/api/constants';
 import { NAVIGATION_ITEMS } from '@/constants/NavigationItems';
-import { IApiResponse } from '@/interfaces/IApiResponse';
+import { IResponse } from '@/interfaces/IResponse';
 import { IUser } from '@/interfaces/IUser';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
 import AppLogo from './AppLogo';
 import MaxWidthContainer from './MaxWidthContainer';
 
@@ -20,7 +19,7 @@ export default function AppNavbar() {
 
   async function me() {
     try {
-      const response = await request.get<IApiResponse<IMe>>(AUTH_ROUTES.ME);
+      const response = await request.get<IResponse<IMe>>(AUTH_ROUTES.ME);
       if (response.data.status === 200) {
         setUser(response.data.data);
       } else {
@@ -31,14 +30,9 @@ export default function AppNavbar() {
     }
   }
 
-  async function logout(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-    const response = await request.post<IApiResponse<null>>(AUTH_ROUTES.LOGOUT);
-    if (response.data.status === 200) {
-      window.location.reload();
-    } else {
-      toast.error(response.data.message);
-    }
+  function clearTokens() {
+    localStorage.removeItem(ACCESS_TOKEN);
+    localStorage.removeItem(REFRESH_TOKEN);
   }
 
   useEffect(() => {
@@ -89,7 +83,7 @@ export default function AppNavbar() {
                   <Link href='/account/profile'>Profile</Link>
                 </li>
                 <li className='text-red-500'>
-                  <button onClick={logout}>Logout</button>
+                  <button onClick={() => clearTokens()}>Logout</button>
                 </li>
               </ul>
             </div>
@@ -98,11 +92,11 @@ export default function AppNavbar() {
           ) : (
             <>
               <div className='flex flex-row space-x-2'>
-                <Link href={'/log-in'} className='btn btn-outline btn-primary'>
-                  Log in
+                <Link href='/sign-in' className='btn btn-outline btn-primary'>
+                  Sign in
                 </Link>
-                <Link href={'/register'} className='btn btn-soft btn-primary'>
-                  Register
+                <Link href='/sign-up' className='btn btn-soft btn-primary'>
+                  Sign up
                 </Link>
               </div>
             </>

@@ -1,9 +1,9 @@
-export interface IUser {
-  id: string;
+export type IUser = {
+  created_at: string;
   email: string;
-  name: string;
+  id: string;
   is_admin: boolean;
   is_verified: boolean;
-  created_at: string;
+  name: string;
   updated_at: string;
-}
+};

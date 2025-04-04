@@ -5,20 +5,15 @@ import { AUTH_ROUTES } from '@/api/constants';
 import AppLogo from '@/components/AppLogo';
 import FormInput from '@/components/FormInput';
 import MaxWidthContainer from '@/components/MaxWidthContainer';
-import { IApiResponse } from '@/interfaces/IApiResponse';
 import { motion } from 'framer-motion';
-import { Mail, RectangleEllipsis } from 'lucide-react';
+import { Mail, RectangleEllipsis, User } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
-import toast from 'react-hot-toast';
-import { ILoginForm, initialLoginForm, loginSchema } from './schema';
+import { initSignUpForm, ISignUpForm, signUpSchema } from './schema';
 
-export default function LogInPage() {
-  const router = useRouter();
-
-  const [formData, setFormData] = useState<ILoginForm>(initialLoginForm);
-  const [errors, setErrors] = useState<ILoginForm>(initialLoginForm);
+export default function SignUpPage() {
+  const [formData, setFormData] = useState<ISignUpForm>(initSignUpForm);
+  const [errors, setErrors] = useState<ISignUpForm>(initSignUpForm);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -29,15 +24,19 @@ export default function LogInPage() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setErrors(initialLoginForm);
+    setErrors(initSignUpForm);
 
     // Validate the form data
-    const validation = loginSchema.safeParse(formData);
+    const validation = signUpSchema.safeParse(formData);
     if (!validation.success) {
       const fieldErrors = validation.error.flatten().fieldErrors;
       setErrors({
+        name: fieldErrors.name ? fieldErrors.name[0] : '',
         email: fieldErrors.email ? fieldErrors.email[0] : '',
         password: fieldErrors.password ? fieldErrors.password[0] : '',
+        passwordConfirmation: fieldErrors.passwordConfirmation
+          ? fieldErrors.passwordConfirmation[0]
+          : '',
       });
       return;
     }
@@ -45,18 +44,8 @@ export default function LogInPage() {
     // Submit the form data
     setIsSubmitting(true);
     try {
-      const response = await request.post<IApiResponse<null>>(
-        AUTH_ROUTES.LOGIN,
-        formData,
-      );
-      if (response.data.status === 200) {
-        toast.success('Login successful!');
-        router.push('/');
-      } else {
-        toast.error(response.data.message);
-      }
-    } catch {
-      toast.error('Login failed. Please try again.');
+      const response = await request.post(AUTH_ROUTES.SIGN_UP, formData);
+      console.log('~ Sign up response:', response);
     } finally {
       setIsSubmitting(false);
     }
@@ -74,10 +63,21 @@ export default function LogInPage() {
               Intelligent Destination and Route Recommendations for Journey
             </h1>
             <h2 className='text-secondary'>
-              Welcome back! Please login to your account.
+              Create your account to explore personalized travel
+              recommendations.
             </h2>
           </div>
           <div className='flex flex-col gap-2'>
+            <FormInput
+              required
+              name='name'
+              icon={<User size={16} />}
+              placeholder='Full name'
+              error={errors.name}
+              value={formData.name}
+              onChange={handleChange}
+              isSubmitting={isSubmitting}
+            />
             <FormInput
               required
               name='email'
@@ -99,12 +99,17 @@ export default function LogInPage() {
               value={formData.password}
               isSubmitting={isSubmitting}
             />
-            <Link
-              href={'/forgot-password'}
-              className='text-right text-sm hover:link'
-            >
-              Forgot password?
-            </Link>
+            <FormInput
+              required
+              type='password'
+              name='passwordConfirmation'
+              icon={<RectangleEllipsis size={16} />}
+              placeholder='Confirm password'
+              onChange={handleChange}
+              error={errors.passwordConfirmation}
+              value={formData.passwordConfirmation}
+              isSubmitting={isSubmitting}
+            />
           </div>
           <motion.button
             type='submit'
@@ -113,16 +118,15 @@ export default function LogInPage() {
             className='btn btn-primary'
             aria-disabled={isSubmitting}
           >
-            Sign in
+            Sign up
           </motion.button>
         </form>
         <div className='divider' />
         <p className='text-center'>
-          Don&apos;t have account?{' '}
-          <Link href='/register' className='link text-primary'>
-            Register
-          </Link>{' '}
-          now.
+          Already have an account?{' '}
+          <Link href='/log-in' className='link text-primary'>
+            Sign in
+          </Link>
         </p>
       </div>
     </MaxWidthContainer>
