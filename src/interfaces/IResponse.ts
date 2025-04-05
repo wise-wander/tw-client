@@ -3,3 +3,5 @@ export type IResponse<T> = {
   status: number;
   message: string;
 };
+
+export type IMessageResponse = IResponse<null>;

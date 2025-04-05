@@ -1,7 +1,6 @@
 'use client';
 
-import request from '@/api';
-import { AUTH_ROUTES } from '@/api/constants';
+import { postSignUp } from '@/api/auth';
 import AppLogo from '@/components/AppLogo';
 import FormInput from '@/components/FormInput';
 import MaxWidthContainer from '@/components/MaxWidthContainer';
@@ -44,7 +43,7 @@ export default function SignUpPage() {
     // Submit the form data
     setIsSubmitting(true);
     try {
-      const response = await request.post(AUTH_ROUTES.SIGN_UP, formData);
+      const response = await postSignUp(formData);
       console.log('~ Sign up response:', response);
     } finally {
       setIsSubmitting(false);

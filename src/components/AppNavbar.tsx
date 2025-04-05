@@ -1,9 +1,8 @@
 'use client';
 
-import request from '@/api';
-import { ACCESS_TOKEN, AUTH_ROUTES, REFRESH_TOKEN } from '@/api/constants';
+import { getMe } from '@/api/auth';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/api/constants';
 import { NAVIGATION_ITEMS } from '@/constants/NavigationItems';
-import { IResponse } from '@/interfaces/IResponse';
 import { IUser } from '@/interfaces/IUser';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,19 +10,15 @@ import { useEffect, useState } from 'react';
 import AppLogo from './AppLogo';
 import MaxWidthContainer from './MaxWidthContainer';
 
-type IMe = Omit<IUser, 'is_admin'>;
-
 export default function AppNavbar() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [user, setUser] = useState<IMe | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
 
   async function me() {
     try {
-      const response = await request.get<IResponse<IMe>>(AUTH_ROUTES.ME);
-      if (response.data.status === 200) {
-        setUser(response.data.data);
-      } else {
-        setUser(null);
+      const response = await getMe();
+      if (response.status === 200) {
+        setUser(response.data);
       }
     } finally {
       setIsLoading(false);

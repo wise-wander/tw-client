@@ -1,11 +1,9 @@
 'use client';
 
-import request from '@/api';
-import { AUTH_ROUTES } from '@/api/constants';
+import { postSignIn } from '@/api/auth';
 import AppLogo from '@/components/AppLogo';
 import FormInput from '@/components/FormInput';
 import MaxWidthContainer from '@/components/MaxWidthContainer';
-import { IResponse } from '@/interfaces/IResponse';
 import { motion } from 'framer-motion';
 import { Mail, RectangleEllipsis } from 'lucide-react';
 import Link from 'next/link';
@@ -45,15 +43,12 @@ export default function SignInPage() {
     // Submit the form data
     setIsSubmitting(true);
     try {
-      const response = await request.post<IResponse<null>>(
-        AUTH_ROUTES.SIGN_IN,
-        formData,
-      );
-      if (response.data.status === 200) {
-        toast.success(response.data.message);
+      const response = await postSignIn(formData);
+      if (response.status === 200) {
+        toast.success(response.message);
         router.push('/');
       } else {
-        toast.error(response.data.message);
+        toast.error(response.message);
       }
     } catch {
       toast.error('An error occurred');
