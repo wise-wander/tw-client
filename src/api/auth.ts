@@ -1,7 +1,8 @@
 import { IMessageResponse, IResponse } from '@/interfaces/IResponse';
+import { ITokenPair } from '@/interfaces/IToken';
 import { IUser } from '@/interfaces/IUser';
 import api from '.';
-import { AUTH_ROUTES } from './constants';
+import { ACCESS_TOKEN, AUTH_ROUTES, REFRESH_TOKEN } from './constants';
 
 type IMeResponse = IResponse<IUser>;
 
@@ -13,7 +14,11 @@ export async function getMe() {
 export async function postSignIn(json: { email: string; password: string }) {
   const response = await api
     .post(AUTH_ROUTES.SIGN_IN, { json: json })
-    .json<IMessageResponse>();
+    .json<ITokenPair>();
+  if (response.status === 200) {
+    localStorage.setItem(ACCESS_TOKEN, response.data.access_token);
+    localStorage.setItem(REFRESH_TOKEN, response.data.refresh_token);
+  }
   return response;
 }
 
